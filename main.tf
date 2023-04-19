@@ -50,7 +50,7 @@ module "linux" {
   subnet_id             = module.network.subnet1_id
   tags                  = module.resource_group.tags
   primary_blob_endpoint = module.common.primary_blob_endpoint
-  ansible_path = "//wsl.localhost/Ubuntu/home/paramvir/automation/ansible/assignment"
+  ansible_path = "~/automation/terraform"
   ansible_playbook = "groupX-playbook.yaml"
 }
 
