@@ -1,0 +1,5 @@
+- name: Creating users and group
+  hosts: linux
+  become: true
+  roles:
+    - users

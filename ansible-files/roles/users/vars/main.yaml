@@ -1,0 +1,4 @@
+cloud_admin_group: cloudadmins
+users:
+  - name: user1000
+  - name: user2000

@@ -1,0 +1,22 @@
+- name: Create cloudadmins group
+  group:
+    name: "{{ cloud_admin_group }}"
+    state: present
+
+- name: Create users
+  user:
+    name: "{{ item.name }}"
+    groups: "{{ cloud_admin_group }},wheel"
+    password: "{{ 'password' | password_hash('sha512') }}"
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_comment: "{{ item.name }}@{{ inventory_hostname_short }}"
+    ssh_key_file: "~/.ssh/id_rsa"
+  loop: "{{ users }}"
+
+- name: Copy SSH public keys to authorized keys
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    state: present
+  loop: "{{ users }}"

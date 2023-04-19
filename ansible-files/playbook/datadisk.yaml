@@ -1,0 +1,5 @@
+- name: Partition and mount data disk
+  hosts: linux
+  become: true
+  roles:
+    - datadisk

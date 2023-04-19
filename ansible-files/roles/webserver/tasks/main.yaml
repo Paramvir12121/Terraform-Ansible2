@@ -1,0 +1,34 @@
+---
+- name: Install Apache web server
+  become: true
+  package:
+    name: httpd
+    state: latest
+
+- name: Create vm files
+  copy:
+    content: "{{ inventory_hostname }}"
+    dest: "/tmp/vm{{ inventory_hostname}}.html"
+
+- name: Copy vm file as index.html to the managed nodes
+  copy:
+    src: "/tmp/vm{{ inventory_hostname}}.html"
+    dest: /var/www/html/index.html
+    mode: "0444"
+    remote_src: true
+  notify: restart apache
+
+- name: Start and enable Apache server
+  become: true
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Ensure Apache service starts at boot
+  become: true
+  systemd:
+    name: httpd
+    enabled: yes
+    masked: no
+  notify: restart apache

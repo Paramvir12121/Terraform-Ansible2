@@ -1,27 +1,23 @@
-resource "null_resource" "linux_provisioner" {
-  count      = var.nb_count
-  depends_on = [azurerm_linux_virtual_machine.linux-vm]
+# resource "null_resource" "linux_provisioner" {
+#   count      = var.nb_count
+#   depends_on = [azurerm_linux_virtual_machine.linux-vm]
 
-  provisioner "remote-exec" {
-    inline = ["/usr/bin/hostname"]
-    connection {
-      type     = "ssh"
-      user     = var.admin_username
-      password = var.admin_password
-      host     = element(azurerm_public_ip.linux-pip[*].fqdn, count.index + 1)
-    }
-  }
-
-}
-# resource "null_resource" "ansible-configuration" {
-#   provisioner "local-exec" {
-#      command ="ansible-playbook -i '${azurerm_public_ip.linux-pip[*].public_ip_address},' -u ${var.admin_username} ${var.ansible_path}/groupX-playbook.yaml"
-#     # working_dir = "${var.ansible_path}"
-#     # connection {
-#     #   type     = "ssh"
-      
-#     # }
+#   provisioner "remote-exec" {
+#     inline = ["/usr/bin/hostname"]
+#     connection {
+#       type     = "ssh"
+#       user     = var.admin_username
+#       password = var.admin_password
+#       host     = element(azurerm_public_ip.linux-pip[*].fqdn, count.index + 1)
 #     }
+#   }
+
 # }
+resource "null_resource" "ansible-configuration" {
+  provisioner "local-exec" {
+     command ="ansible-playbook -i '${azurerm_public_ip.linux-pip[*].public_ip_address},' -u ${var.admin_username} ${var.ansible_path}/groupX-playbook.yaml"
+    
+    }
+}
 
 

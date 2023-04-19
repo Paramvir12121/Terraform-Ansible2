@@ -1,0 +1,5 @@
+- name: web server
+  hosts: linux
+  become: true
+  roles:
+    - webserver
