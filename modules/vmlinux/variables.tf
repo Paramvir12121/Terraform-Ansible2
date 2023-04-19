@@ -81,8 +81,8 @@ variable "tags" {
 variable "admin_ssh_key" {
   type = map(any)
   default = {
-    vm-ssh-public-key  = "~/.ssh/id_rsa.pub"
-    vm-ssh-private-key = "~/.ssh/id_rsa"
+    vm-ssh-public-key  = "/home/ubuntu/.ssh/id_rsa.pub"
+    vm-ssh-private-key = "/home/ubuntu/.ssh/id_rsa"
   }
 }
 
