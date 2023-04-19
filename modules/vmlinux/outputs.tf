@@ -2,8 +2,11 @@ output "Linux_hostname" {
   value = [azurerm_linux_virtual_machine.linux-vm[*].name]
 }
 
-output "Linux_public_ip_addresses" {
-  value = [azurerm_linux_virtual_machine.linux-vm[*].public_ip_address]
+output "Linux_public_ip_addresses1" {
+  value = azurerm_linux_virtual_machine.linux-vm[0].public_ip_address
+}
+output "Linux_public_ip_addresses2" {
+  value = azurerm_linux_virtual_machine.linux-vm[1].public_ip_address
 }
 
 output "Linux_private_ip_address" {

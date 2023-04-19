@@ -76,13 +76,13 @@ resource "azurerm_availability_set" "linux-avs" {
 }
 
 # Network Watcher Extension
-resource "azurerm_virtual_machine_extension" "linux-vme" {
-  count                = var.nb_count
-  name                 = "${var.vmlinux_name}-vme-${format("%1d", count.index + 1)}"
-  virtual_machine_id   = azurerm_linux_virtual_machine.linux-vm[count.index].id
-  publisher            = var.vme["publisher"]
-  type                 = var.vme["type"]
-  type_handler_version = var.vme["type_handler_version"]
+# resource "azurerm_virtual_machine_extension" "linux-vme" {
+#   count                = var.nb_count
+#   name                 = "${var.vmlinux_name}-vme-${format("%1d", count.index + 1)}"
+#   virtual_machine_id   = azurerm_linux_virtual_machine.linux-vm[count.index].id
+#   publisher            = var.vme["publisher"]
+#   type                 = var.vme["type"]
+#   type_handler_version = var.vme["type_handler_version"]
 
-  depends_on = [null_resource.linux_provisioner]
-}
+#   depends_on = [null_resource.linux_provisioner]
+# }

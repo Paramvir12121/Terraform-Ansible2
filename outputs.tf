@@ -60,8 +60,11 @@ output "LINUX" {
 output "Linux_hostname" {
   value = module.linux.Linux_hostname
 }
-output "Linux_public_ip_addresses" {
-  value = module.linux.Linux_public_ip_addresses
+output "Linux_public_ip_addresses1" {
+  value = module.linux.Linux_public_ip_addresses1
+}
+output "Linux_public_ip_addresses2" {
+  value = module.linux.Linux_public_ip_addresses2
 }
 output "Linux_private_ip_address" {
   value = module.linux.Linux_private_ip_address
@@ -87,10 +90,14 @@ output "Windows_dns" {
   value = module.windows.Windows_dns
 }
 
-# # Loadbalancer
-# output "Loadbalancer_name" {
-#   value = module.loadbalancer.Loadbalancer.name
-# }
+# Loadbalancer
+output "Loadbalancer_name" {
+  value = module.loadbalancer.Loadbalancer.name
+}
+
+output "load_balancer_fqdn" {
+  value = "${module.loadbalancer.Loadbalancer.name}.${local.location}.cloudapp.azure.com"
+}
 
 # Database
 output "DATABASE" {

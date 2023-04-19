@@ -1,0 +1,9 @@
+[linux]
+linux-9079-vm1 ansible_host=40.117.153.201 ansible_user=Paramvir9079
+linux-9079-vm2 ansible_host=13.68.196.104 ansible_user=Paramvir9079
+
+[os:children]
+linux
+
+[linux:vars]
+ansible_connection=ssh

@@ -4,7 +4,7 @@ resource "azurerm_public_ip" "loadbalancer-pubip" {
   name                = "${var.loadbalancer-pubip}-lbpip-${format("%1d", count.index + 1)}"
   location            = var.location
   resource_group_name = var.rgroup_name
-  domain_name_label   = "lbdns-9198${format("%1d", count.index + 1)}"
+  domain_name_label   = "lbdns-9079${format("%1d", count.index + 1)}"
   allocation_method   = "Static"
   tags                = var.tags
 }
@@ -37,7 +37,7 @@ resource "azurerm_lb_backend_address_pool" "backend_address_pool" {
 resource "azurerm_network_interface_backend_address_pool_association" "loadbalancer_pool_association" {
   for_each                = var.vmlinux_name
   network_interface_id    = element(var.vmlinux_network_interface_id, 0)[0][each.value]
-  ip_configuration_name   = "lvm-9198-ipconfig-${each.value + 1}"
+  ip_configuration_name   = "lvm-9079-ipconfig-${each.value + 1}"
   backend_address_pool_id = azurerm_lb_backend_address_pool.backend_address_pool.id
 }
 

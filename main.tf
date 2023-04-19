@@ -1,7 +1,7 @@
 # Resource Group Module
 module "resource_group" {
   source      = "./modules/rgroup"
-  rgroup_name = "9079-assignment2-RG"
+  rgroup_name = "9079-Assignment2-RG"
   location    = local.location
   tags        = local.tags
 }
@@ -50,7 +50,7 @@ module "linux" {
   subnet_id             = module.network.subnet1_id
   tags                  = module.resource_group.tags
   primary_blob_endpoint = module.common.primary_blob_endpoint
-  ansible_path = "~/automation/ansible/assignment/playbook"
+  ansible_path = "//wsl.localhost/Ubuntu/home/paramvir/automation/ansible/assignment"
   ansible_playbook = "groupX-playbook.yaml"
 }
 
@@ -82,20 +82,20 @@ module "datadisk" {
   vmlinux_id = [module.linux.Linux_id]
 }
 
-# # LoadBalancer Module
-# module "loadbalancer" {
-#   source      = "./modules/loadbalancer"
-#   rgroup_name = module.resource_group.rgroup_name
-#   location    = module.resource_group.location
-#   tags        = module.resource_group.tags
-#   vmlinux_name = {
-#     lvm-9079-vm-1 = 0
-#     lvm-9079-vm-2 = 1
-#   }
-#   vmlinux_network_interface_id = [module.linux.Linux_network_interface_id]
-#   vmlinux_pip_id               = module.linux.Linux_public_ip_addresses_id
+# LoadBalancer Module
+module "loadbalancer" {
+  source      = "./modules/loadbalancer"
+  rgroup_name = module.resource_group.rgroup_name
+  location    = module.resource_group.location
+  tags        = module.resource_group.tags
+  vmlinux_name = {
+    lvm-9079-vm-1 = 0
+    lvm-9079-vm-2 = 1
+  }
+  vmlinux_network_interface_id = [module.linux.Linux_network_interface_id]
+  vmlinux_pip_id               = module.linux.Linux_public_ip_addresses_id
 
-# }
+}
 
 # Database Module
 module "database" {
