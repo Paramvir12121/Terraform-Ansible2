@@ -1,0 +1,5 @@
+- name: system_profile
+  hosts: linux
+  become: true
+  roles:
+    - system_profile

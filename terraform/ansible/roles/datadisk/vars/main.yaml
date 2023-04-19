@@ -1,0 +1,7 @@
+---
+datadisk_xfs_partition_size: 4G
+datadisk_ext4_partition_size: 5G
+datadisk_xfs_mountpoint: /part1
+datadisk_ext4_mountpoint: /part2
+datadisk_device: /dev/sdc
+state: absent
